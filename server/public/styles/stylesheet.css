@@ -1,0 +1,59 @@
+h1 {
+font-family: sans-serif;
+text-align: center;
+}
+
+main {
+  width:270px;
+  margin:auto;
+  background-color: peachpuff;
+  box-shadow: 4px 4px black;
+  padding:5px
+}
+
+.display {
+  background-color: grey;
+  border: 1px solid black;
+  height:75px;
+  width: 260px;
+  margin: 5px 5px 10px 5px;
+  border-radius: 5px;
+  font-family: sans-serif;
+  font-size: 24px;
+}
+
+.numbers {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.symbols {
+  display: inline-block;
+}
+
+.button {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-color: grey;
+  margin: 5px;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 38px;
+  border-radius: 5px;
+  box-shadow: 3px 3px black;
+}
+
+.button:active {
+  transform:translate(2px, 2px);
+  box-shadow: 0px 0px #000;
+}
+
+.clear, .clearEntry {
+  width:82px;
+}
+
+.side {
+  display: block;
+  margin: 10px;
+}
