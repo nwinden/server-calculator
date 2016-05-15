@@ -30,7 +30,8 @@ var value = '';
 var operationData = { num1: 0,
                       num2: 0,
                       urlID:'',
-                      first:0};
+                      first:0,
+                      equalPressed:false};
 
 function checkButton() {
 
@@ -54,6 +55,10 @@ function checkButton() {
 
 function addToScreen(number) {
   var display = $('.current');
+
+  if (operationData.equalPressed == 1) {
+    clear();
+  }
 
   value += number;
 
@@ -88,8 +93,10 @@ function operand(type) {
       $('.last').text(response.answ);
 
       operationData.num2 = response.answ;
-      value='';
       operationData.first = operationData.first + 1;
+      operationData.equalPressed = false;
+      value='';
+
     }
   });
 }
@@ -111,8 +118,9 @@ function equals() {
       $('.current').text(response.answ);
       $('.last').text('');
       operationData.num2 = response.answ;
-      value='';
-
+      operationData.first = 0;
+      operationData.equalPressed = true;
+      value=response.answ;
     }
   });
 }
@@ -124,7 +132,8 @@ function clear() {
   operationData = { num1: 0,
                     num2: 0,
                     urlID:'',
-                    first:0};
+                    first:0,
+                    equalPressed:false};
 }
 
 function clearEntry() {
