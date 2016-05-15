@@ -4,10 +4,10 @@ var router = express.Router();
 router.post('/', function (req, res) {
   var val1 = Number(req.body.num1);
   var val2 = Number(req.body.num2);
-  var clicked = req.body.clicked;
+  var first = req.body.first;
   var ans = 0;
 
-  if (clicked == false) {
+  if (first < 1) {
     ans = val1;
   } else {
     ans = val2*val1;

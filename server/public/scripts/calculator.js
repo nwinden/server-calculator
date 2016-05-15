@@ -30,10 +30,10 @@ var value = '';
 var operationData = { num1: 0,
                       num2: 0,
                       urlID:'',
-                      clicked:false};
+                      first:0};
 
 function checkButton() {
-  
+
   var clicked = $(this).data('data');
 
   if(typeof clicked == 'number' || clicked == '.'){
@@ -53,7 +53,7 @@ function checkButton() {
 }
 
 function addToScreen(number) {
-  var display = $('.display');
+  var display = $('.current');
 
   value += number;
 
@@ -84,14 +84,14 @@ function operand(type) {
     url:'/'+operationData.urlID,
     data:operationData,
     success: function(response) {
-      $('.display').text(response.answ);
+      $('.current').text('0');
+      $('.last').text(response.answ);
 
       operationData.num2 = response.answ;
-      operationData.clicked = true;
       value='';
+      operationData.first = operationData.first + 1;
     }
   });
-
 }
 
 function equals() {
@@ -108,9 +108,9 @@ function equals() {
     url:'/'+operationData.urlID,
     data:operationData,
     success: function(response) {
-      $('.display').text(response.answ);
+      $('.current').text(response.answ);
+      $('.last').text('');
       operationData.num2 = response.answ;
-      operationData.clicked = false;
       value='';
 
     }
@@ -118,16 +118,17 @@ function equals() {
 }
 
 function clear() {
-  $('.display').text('0');
+  $('.current').text('0');
+  $('.last').text('');
   value = '';
   operationData = { num1: 0,
                     num2: 0,
                     urlID:'',
-                    clicked:false};
+                    first:0};
 }
 
 function clearEntry() {
- $('.display').text('0');
+ $('.current').text('0');
  value = '';
 }
 
@@ -138,7 +139,8 @@ function turnNeg() {
   } else {
     value = '-' + value;
   }
-  $('.display').text(value);
+  $('.current').text(value);
+
 }
 
 function countDots(val) {

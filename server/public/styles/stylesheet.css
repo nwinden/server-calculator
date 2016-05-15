@@ -22,6 +22,15 @@ main {
   font-size: 24px;
 }
 
+.current {
+  padding-left: 5px;
+  margin: 0;
+}
+.last {
+  padding-left: 5px;
+  margin:10px 0 0 0;
+}
+
 .numbers {
   display: inline-block;
   margin-left: 5px;
