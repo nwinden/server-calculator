@@ -7,6 +7,7 @@ router.post('/', function (req, res) {
   var first = req.body.first;
   var ans = 0;
 
+  //subtracts the information, except the first time, which just sends the first number seleced first and retuns the answer
   if(first < 1) {
     ans = val1;
   } else {

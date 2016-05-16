@@ -1,7 +1,6 @@
 $(function() {
 
-console.log('Hey Buckaroo!');
-
+//on document ready, the buttons are given data according to their function
 $('.num1').data('data',1);
 $('.num2').data('data',2);
 $('.num3').data('data',3);
@@ -22,17 +21,22 @@ $('.minus').data('data','subtract');
 $('.multiply').data('data','multiply');
 $('.divide').data('data','divide');
 
+//the event listener that checks which button is pressed
 $('.button').on('click', checkButton);
 
 });
 
+//the value variable which is whats used to change whats on the dom
 var value = '';
+
+//the object that stores the calc operation information
 var operationData = { num1: 0,
                       num2: 0,
                       urlID:'',
                       first:0,
                       equalPressed:false};
 
+//this button  checks what was clicked and then routes it to the appropriate funciton
 function checkButton() {
 
   var clicked = $(this).data('data');
@@ -53,19 +57,23 @@ function checkButton() {
 
 }
 
+// adds the numbers selected to the DOM
 function addToScreen(number) {
   var display = $('.current');
 
-  if (operationData.equalPressed == 1) {
+  //if you have pressed equals and click another number it clears the field
+  if (operationData.equalPressed == true) {
     clear();
   }
 
   value += number;
 
+  //makes the number a decimal if the dot is the first thing selected
   if (value === '.') {
     value = '0.'
   }
 
+  //makes sure you never get more than one decimal point
   if (countDots(value) == 2) {
     value = value.substring(0, value.length-1);
   }
@@ -74,18 +82,22 @@ function addToScreen(number) {
 
 }
 
+//stores the number information and type of operand selected and does a AJAX request
 function operand(type) {
 
+  //if value is empty it automatically sets num1 to 0
   if (value == '') {
     operationData.num1 = 0;
   } else {
     operationData.num1 = value;
   }
 
+  //if its the first time an operation is being ran, it sets the data a the start
   if(operationData.first < 1){
     operationData.urlID = type;
   }
 
+  //displays the answer to the operation and changes relevant data to continue operations
   $.ajax({
     type:'POST',
     url:'/'+operationData.urlID,
@@ -104,6 +116,7 @@ function operand(type) {
   });
 }
 
+//finishes out the operation and displays the answer
 function equals() {
 
 
@@ -113,6 +126,7 @@ function equals() {
     operationData.num1 = value;
   }
 
+  //displays the answer to the operation and changes relevant data to continue operations
   $.ajax({
     type:'POST',
     url:'/'+operationData.urlID,
@@ -128,6 +142,7 @@ function equals() {
   });
 }
 
+//clears the data from everything and starts the operation at new
 function clear() {
   $('.current').text('0');
   $('.last').text('');
@@ -139,11 +154,13 @@ function clear() {
                     equalPressed:false};
 }
 
+//clears the current entry
 function clearEntry() {
  $('.current').text('0');
  value = '';
 }
 
+//toggles the current number from being negative
 function turnNeg() {
 
   if (value[0] ==  '-') {
@@ -155,6 +172,7 @@ function turnNeg() {
 
 }
 
+//counts the number of decimal points and returns that number
 function countDots(val) {
   var counter = 0;
   for (var i = 0; i < val.length; i++) {
