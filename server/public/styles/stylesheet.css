@@ -31,6 +31,19 @@ main {
   margin:10px 0 0 0;
 }
 
+.retro{
+  margin-left: 130px;
+}
+
+.solar{
+  width: 25px;
+  display: inline-block;
+  height: 25px;
+  background-color: black;
+  border: 1px solid red;
+  margin: -2px;
+}
+
 .numbers {
   display: inline-block;
   margin-left: 5px;
