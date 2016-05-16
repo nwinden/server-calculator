@@ -82,7 +82,9 @@ function operand(type) {
     operationData.num1 = value;
   }
 
-  operationData.urlID = type;
+  if(operationData.first < 1){
+    operationData.urlID = type;
+  }
 
   $.ajax({
     type:'POST',
@@ -95,6 +97,7 @@ function operand(type) {
       operationData.num2 = response.answ;
       operationData.first = operationData.first + 1;
       operationData.equalPressed = false;
+      operationData.urlID = type;
       value='';
 
     }
